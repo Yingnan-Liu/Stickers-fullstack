@@ -29,6 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id), //返回该用户的token
     });
   } else {
     res.status(400);
@@ -51,6 +52,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user.id,
       name: user.name,
       email: user.email,
+      token: generateToken(user._id), //返回该用户的token
     });
   } else if (!user) {
     res.status(400);
@@ -63,10 +65,18 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // @desc  用户信息 get user data
 // @route GET /api/users/me
-// @access Public
+// @access Private
 const getMe = asyncHandler(async (req, res) => {
   res.json({ message: "Get User data" });
 });
+
+//generate JWT
+const generateToken = (id) => {
+  //sign方法 参数一：payload 参数二：secret 参数三：配置项
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 module.exports = {
   registerUser,

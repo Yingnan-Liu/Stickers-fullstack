@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/notes", require("./routes/noteRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
+// here goes middleware
 app.use(errorHandler); //重写express的errhandler
 
 app.listen(port, () => {
