@@ -1,0 +1,11 @@
+
+GET http://localhost:5000/api/notes
+
+###
+POST http://localhost:5000/api/notes
+
+###
+PUT http://localhost:5000/api/notes/123
+
+###
+DELETE http://localhost:5000/api/notes/123
