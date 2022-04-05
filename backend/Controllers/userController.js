@@ -40,7 +40,25 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/login
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Login User" });
+  // 邮箱和密码登录
+  const { email, password } = req.body;
+  // 根据邮箱查询数据库中的user
+  const user = await User.findOne({ email });
+  // 如果用户存在并且输入的密码和数据库中的密码校验通过
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+  } else if (!user) {
+    res.status(400);
+    throw new Error("邮箱未注册");
+  } else if (!(await bcrypt.compare(password, user.password))) {
+    res.status(400);
+    throw new Error("密码错误，请重新输入");
+  }
 });
 
 // @desc  用户信息 get user data
