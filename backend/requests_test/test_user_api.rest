@@ -1,0 +1,12 @@
+//注册
+POST http://localhost:5000/api/users
+
+
+###
+//登录
+POST http://localhost:5000/api/users/login
+
+
+###
+//查看用户信息
+GET http://localhost:5000/api/users/me

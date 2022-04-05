@@ -10,7 +10,9 @@ const app = express();
 app.use(express.json()); //解析req.body
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/notes", require("./Routes/noteRoutes"));
+app.use("/api/notes", require("./routes/noteRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
+
 app.use(errorHandler); //重写express的errhandler
 
 app.listen(port, () => {

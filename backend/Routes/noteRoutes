@@ -5,7 +5,7 @@ const {
   setNote,
   updateNote,
   deleteNote,
-} = require("../Controllers/noteController");
+} = require("../controllers/noteController");
 
 router.get("/", getNotes);
 router.post("/", setNote);
