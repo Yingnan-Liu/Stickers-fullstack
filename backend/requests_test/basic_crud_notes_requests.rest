@@ -1,0 +1,21 @@
+
+GET http://localhost:5000/api/notes
+
+###
+POST http://localhost:5000/api/notes
+Content-Type: application/json
+
+{
+    "text":"second test"
+}
+
+
+###
+PUT http://localhost:5000/api/notes/624bf9ad504bdda835bb69cc
+Content-Type: application/json
+
+{
+    "text":"test put"
+}
+###
+DELETE http://localhost:5000/api/notes/624bf9ad504bdda835bb69cc
