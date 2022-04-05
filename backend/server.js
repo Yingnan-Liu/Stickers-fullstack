@@ -1,8 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv").config(); //环境变量 allow a .env file with our enviroment variables in it
 const { errorHandler } = require("./middleware/errorMiddleware");
+const connectDB = require("./config/db");
 const port = process.env.PORT || 5000;
 
+connectDB(); //连接数据库
 const app = express();
 
 app.use(express.json()); //解析req.body
