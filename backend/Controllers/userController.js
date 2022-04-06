@@ -67,7 +67,12 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/me
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
-  res.json({ message: "Get User data" });
+  const { _id, name, email } = await User.findById(req.user.id); //authMiddleware中设置的req.user
+  res.status(200).json({
+    id: _id,
+    name,
+    email,
+  });
 });
 
 //generate JWT

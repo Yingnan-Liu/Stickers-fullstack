@@ -4,7 +4,7 @@ const Note = require("../models/noteModel"); //导入Note model 可以通过Note
 // @route GET /api/goals
 // @access Private
 const getNotes = asyncHandler(async (req, res) => {
-  const notes = await Note.find(); //拿到所有的notes
+  const notes = await Note.find({ user: req.user.id }); //拿到对应user的notes
   res.status(200).json(notes);
 });
 
@@ -19,6 +19,7 @@ const setNote = asyncHandler(async (req, res) => {
   }
   const note = await Note.create({
     text: req.body.text,
+    user: req.user.id,
   });
   res.status(200).json(note);
 });

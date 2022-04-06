@@ -1,4 +1,4 @@
-// 检验token的中间件
+// 检验token的中间件函数
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
@@ -18,7 +18,7 @@ const protect = asyncHandler(async (req, res, next) => {
       //verify token 从token中得到payload（user.id，生成的时候输入的 可以是其他值，也会被解析出来）
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log("decoded:", decoded);
-      // get user from token
+      // get user from token  ********
       req.user = await User.findById(decoded.id).select("-password"); //通过user.id查找出user然后去掉password属性
       console.log("req.user : ", req.user);
 

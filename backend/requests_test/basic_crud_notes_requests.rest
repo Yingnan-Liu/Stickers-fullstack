@@ -1,12 +1,15 @@
 
 GET http://localhost:5000/api/notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGM2MjkxMzA0ZjE5NWYyOTcxOWNlYiIsImlhdCI6MTY0OTIxMzkxMywiZXhwIjoxNjUxODA1OTEzfQ.MqsKiX5JqpX0Byg0qu50sla44bnGwwUZ9l3mke9bHv4
+
 
 ###
 POST http://localhost:5000/api/notes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGM2MjkxMzA0ZjE5NWYyOTcxOWNlYiIsImlhdCI6MTY0OTIxMzkxMywiZXhwIjoxNjUxODA1OTEzfQ.MqsKiX5JqpX0Byg0qu50sla44bnGwwUZ9l3mke9bHv4
 
 {
-    "text":"second test"
+    "text":"username test2 set note"
 }
 
 
