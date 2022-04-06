@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler"); //express中使用async await
 const Note = require("../models/noteModel"); //导入Note model 可以通过Note调用各种mongoose方法 增删查改
+const User = require("../models/userModel"); // 导入User model在updateNote中先检查user
 // @desc   Get notes
 // @route GET /api/goals
 // @access Private
@@ -19,7 +20,7 @@ const setNote = asyncHandler(async (req, res) => {
   }
   const note = await Note.create({
     text: req.body.text,
-    user: req.user.id,
+    user: req.user.id,  //添加user信息
   });
   res.status(200).json(note);
 });
@@ -34,6 +35,20 @@ const updateNote = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Note not found");
   }
+
+  //检查user是否存在
+  const user = await User.findById(req.user.id)
+  if(!user){
+    res.status(401)
+    throw new Error('User not found')
+  }
+  // 检查当前user和note记录的user相同
+  if(note.user.toString() !== user.id){   //note的user字段中存的是user model的id属性
+    res.status(401)
+    throw new Error('User not authorized')
+  }
+
+
   // 修改note
   const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -50,6 +65,19 @@ const deleteNote = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Note not found");
   }
+
+  //检查user是否存在
+  const user = await User.findById(req.user.id)
+  if(!user){
+    res.status(401)
+    throw new Error('User not found')
+  }
+  // 检查当前user和note记录的user相同
+  if(note.user.toString() !== user.id){
+    res.status(401)
+    throw new Error('User not authorized')
+  }
+
   // 删除note
   await note.remove();
   res.status(200).json({ id: req.params.id });

@@ -1,24 +1,30 @@
 
 GET http://localhost:5000/api/notes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGM2MjkxMzA0ZjE5NWYyOTcxOWNlYiIsImlhdCI6MTY0OTIxMzkxMywiZXhwIjoxNjUxODA1OTEzfQ.MqsKiX5JqpX0Byg0qu50sla44bnGwwUZ9l3mke9bHv4
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGMxZmNiMTZiZWIwZmI2NGU2Y2RiOSIsImlhdCI6MTY0OTIyNjg2MSwiZXhwIjoxNjUxODE4ODYxfQ.ZOmMMuRVMPPUeimINQYGTpH2MDpvYyOmn5XPJghrMvE
 
 ###
 POST http://localhost:5000/api/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGM2MjkxMzA0ZjE5NWYyOTcxOWNlYiIsImlhdCI6MTY0OTIxMzkxMywiZXhwIjoxNjUxODA1OTEzfQ.MqsKiX5JqpX0Byg0qu50sla44bnGwwUZ9l3mke9bHv4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGMxZmNiMTZiZWIwZmI2NGU2Y2RiOSIsImlhdCI6MTY0OTIyNjg2MSwiZXhwIjoxNjUxODE4ODYxfQ.ZOmMMuRVMPPUeimINQYGTpH2MDpvYyOmn5XPJghrMvE
 
 {
-    "text":"username test2 set note"
+    "text":"Lynn add note 11111"
 }
 
 
 ###
-PUT http://localhost:5000/api/notes/624bf9ad504bdda835bb69cc
+PUT http://localhost:5000/api/notes/624d34a704844908ee7f1e97
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGMxZmNiMTZiZWIwZmI2NGU2Y2RiOSIsImlhdCI6MTY0OTIyNjg2MSwiZXhwIjoxNjUxODE4ODYxfQ.ZOmMMuRVMPPUeimINQYGTpH2MDpvYyOmn5XPJghrMvE
+
 
 {
-    "text":"test put"
+    "text":"Lynn add note 11111 to 2222"
 }
+
+
+
 ###
-DELETE http://localhost:5000/api/notes/624bf9ad504bdda835bb69cc
+DELETE http://localhost:5000/api/notes/624d34a704844908ee7f1e97
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGMxZmNiMTZiZWIwZmI2NGU2Y2RiOSIsImlhdCI6MTY0OTIyNjg2MSwiZXhwIjoxNjUxODE4ODYxfQ.ZOmMMuRVMPPUeimINQYGTpH2MDpvYyOmn5XPJghrMvE
+
