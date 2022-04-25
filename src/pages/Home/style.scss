@@ -1,0 +1,38 @@
+
+.header{
+    background: linear-gradient(to right, #74ebd5, #acb6e5)
+    ;
+    .top-bar {
+        display: flex;
+        margin: 0 1rem 0 1rem;
+        justify-content:space-between;
+        .title{
+            width:6rem;
+            display: flex;
+            justify-content: space-around;
+            .logo{
+                font-size: 2rem;
+                margin: auto;
+            }
+        }
+      .btn-area {
+        list-style: none;
+        li{
+            display: inline-block;
+            margin:0 0.8rem 0 0.8rem
+        }
+      }
+    }
+    .search-area{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:15rem;
+    }
+}
+
+.sticker-list-area{
+    width:100vw;
+    display:flex;
+    justify-content: center;
+}
