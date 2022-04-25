@@ -6,9 +6,6 @@ const Stickerlist = () => {
   return (
     <div className="sticker-list">
       <Sticker />
-      <Sticker />
-      <Sticker />
-      <Sticker />
     </div>
   );
 };
