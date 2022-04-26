@@ -1,7 +1,7 @@
 #introduction
 
-使用 materialui
-react-hook-form
+使用 materialUI
+登录注册页面使用 react-hook-form + materialUI 做表单验证
 
 前端：
 主页：

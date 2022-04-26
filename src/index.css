@@ -1,0 +1,16 @@
+body {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #e0dfdf;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=index.css.map */

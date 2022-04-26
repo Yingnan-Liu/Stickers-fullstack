@@ -1,0 +1,61 @@
+.header {
+  background: -webkit-gradient(linear, left top, right top, from(#74ebd5), to(#acb6e5));
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+}
+
+.header .top-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 1rem 0 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header .top-bar .title {
+  width: 6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.header .top-bar .title .logo {
+  font-size: 2rem;
+  margin: auto;
+}
+
+.header .top-bar .btn-area {
+  list-style: none;
+}
+
+.header .top-bar .btn-area li {
+  display: inline-block;
+  margin: 0 0.8rem 0 0.8rem;
+}
+
+.header .search-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 15rem;
+}
+
+.sticker-list-area {
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=style.css.map */

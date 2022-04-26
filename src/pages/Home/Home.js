@@ -1,9 +1,16 @@
-import React from "react";
-import { Switch, Button, TextField } from "@material-ui/core";
+import React, { useState } from "react";
+import { IconButton, Button, TextField } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
+import WbSunnyIcon from "@material-ui/icons/WbSunny";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
 import StickerList from "../../components/StickerList/StickerList";
 import "./style.scss";
 
 const Home = () => {
+  const [isDark, setDark] = useState(false);
+  const handleTheme = () => {
+    setDark(!isDark);
+  };
   return (
     <div className="page">
       <div className="header">
@@ -13,15 +20,20 @@ const Home = () => {
             <h4 className="titlename">Stickers</h4>
           </div>
           <ul className="btn-area">
-            <li className="theme">
-              <span>🌗</span>
-              <Switch defaultChecked color="default" />
+            <li className="change-theme">
+              <IconButton onClick={handleTheme}>
+                {isDark ? <Brightness4Icon /> : <WbSunnyIcon />}
+              </IconButton>
             </li>
             <li className="login">
-              <Button>登 录</Button>
+              <Button component={RouterLink} to="/signin">
+                登 录
+              </Button>
             </li>
             <li className="register">
-              <Button>注 册</Button>
+              <Button component={RouterLink} to="/signup">
+                注 册
+              </Button>
             </li>
           </ul>
         </div>

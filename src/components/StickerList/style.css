@@ -1,0 +1,19 @@
+.sticker-list {
+  width: 80vw;
+  margin: 2rem 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (33.33%)[3];
+      grid-template-columns: repeat(3, 33.33%);
+  -webkit-column-gap: 1rem;
+          column-gap: 1rem;
+  justify-items: center;
+}
+
+@media (max-width: 1000px) {
+  .sticker-list {
+    -ms-grid-columns: (50%)[2];
+        grid-template-columns: repeat(2, 50%);
+  }
+}
+/*# sourceMappingURL=style.css.map */
