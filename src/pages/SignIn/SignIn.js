@@ -1,16 +1,24 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
+import React, { useState } from "react";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Typography,
+  Container,
+  Snackbar,
+  IconButton,
+} from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "@material-ui/icons/Close";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import { useForm } from "react-hook-form";
+import { loginUser, useAuthState, useAuthDispatch } from "../../context";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,11 +40,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const [msg, setMsg] = useState(undefined);
+  const [open, setOpen] = useState(false);
+  const { errorMessage } = useAuthState();
+  const dispatch = useAuthDispatch();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  // 发送登录请求
+  const onSubmit = async (data) => {
+    try {
+      const response = await loginUser(dispatch, data);
+      console.log("onsubmit response:", response); //email name token
+      if (errorMessage) {
+        setOpen(true);
+      }
+      if (response) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("signin中捕获", error);
+      // setMsg(error.response.data.message);
+    }
+  };
+  const handleClose = () => {
+    setOpen(false);
+    // if(){}
+    // navigate("/");
+  };
   return (
     <Container component="main" maxWidth="xs">
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+        message={errorMessage}
+        action={
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        }
+      />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -45,24 +95,34 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign In
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
           <TextField
+            error={errors?.email ? true : false}
+            helperText={errors?.email?.message}
+            {...register("email", {
+              required: true,
+              pattern: {
+                value:
+                  /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/,
+                message: "请输入有效邮箱",
+              },
+            })}
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            id="email"
             label="Email Address"
-            name="email"
-            autoComplete="email"
             autoFocus
           />
           <TextField
             variant="outlined"
+            {...register("password", { required: true })}
             margin="normal"
             required
             fullWidth
-            name="password"
             label="Password"
             type="password"
             id="password"

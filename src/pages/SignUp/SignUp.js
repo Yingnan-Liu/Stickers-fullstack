@@ -59,8 +59,8 @@ export default function SignUp(props) {
       console.log("onsubmit response:", response); //email name token
     } catch (error) {
       console.log("error msg", error.response.data.message);
-      setMsg(error.response.data.message);
-      setOpen(true);
+      // setMsg(error.response.data.message);
+      // setOpen(true);
     }
     // //注册成功跳转登录页面
     // navigate("/signin");
@@ -120,7 +120,7 @@ export default function SignUp(props) {
               required: true,
               pattern: {
                 value:
-                  "/^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/",
+                  /^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+.[a-zA-Z]{2,3}$/,
                 message: "请输入有效邮箱",
               },
             })}

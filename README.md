@@ -1,7 +1,9 @@
 #introduction
 
 使用 materialUI
-登录注册页面使用 react-hook-form + materialUI 做表单验证
+登录注册页面使用 react-hook-form + materialUI 做表单验证和处理
+
+使用 useContext 和 useReducer 管理用户的登录状态
 
 前端：
 主页：
