@@ -2,11 +2,13 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+
 // @desc  注册用户
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   // 拿到body数据
+  console.log("注册");
   const { name, password, email } = req.body;
   // check 是否为空 前端做测试吧
   // check user 是否存在 根据email查找
@@ -42,11 +44,13 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
   // 邮箱和密码登录
+  console.log("登录函数 查询user信息");
   const { email, password } = req.body;
   // 根据邮箱查询数据库中的user
   const user = await User.findOne({ email });
   // 如果用户存在并且输入的密码和数据库中的密码校验通过
 
+  console.log("查到用户信息");
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
@@ -67,12 +71,8 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route GET /api/users/me
 // @access Private
 const getMe = asyncHandler(async (req, res) => {
-  const { _id, name, email } = await User.findById(req.user.id); //authMiddleware中设置的req.user
-  res.status(200).json({
-    id: _id,
-    name,
-    email,
-  });
+  //authMiddleware中设置的req.user
+  res.status(200).json(req.user);
 });
 
 //generate JWT

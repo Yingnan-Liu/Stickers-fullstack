@@ -7,6 +7,7 @@ const connectDB = async () => {
     console.log(`MongoDB connected : ${conn.connection.host}`);
   } catch (err) {
     console.log(err);
+    mongoose.connect.close();
     process.exit(1); //终止进程
   }
 };

@@ -1,5 +1,5 @@
 //注册
-POST http://localhost:5000/api/users
+POST http://localhost:6000/api/users/signup
 Content-Type: application/json
 
 {
@@ -22,5 +22,5 @@ Content-Type: application/json
 //查看用户信息
 GET http://localhost:5000/api/users/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGMxZmNiMTZiZWIwZmI2NGU2Y2RiOSIsImlhdCI6MTY0OTIxMzEwOCwiZXhwIjoxNjUxODA1MTA4fQ.ctqhJT20b07sfux2qT1_zC6UH0c7NZkPKdmnRXlXmMo
-
-
+###
+GET http://localhost:5000/api/users/test

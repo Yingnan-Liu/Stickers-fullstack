@@ -8,7 +8,7 @@ const {
 const { protect } = require("../middleware/authMiddleware.");
 
 // 新建用户 (注册)
-router.post("/", registerUser);
+router.post("/signup", registerUser);
 // 登录 鉴权
 router.post("/login", loginUser);
 // 获取当前用户信息
