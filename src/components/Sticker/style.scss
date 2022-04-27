@@ -1,14 +1,27 @@
 .sticker{
     width:100%;
-    .paper{
-        width:80%;
+    .paper{  
         height:18rem;
         margin:2rem;
+        display: flex;   
+        flex-direction: column;    
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         transition: box-shadow 0.2s;
-        .paper-btns{
+        .paper-header{
+            display: flex;
+            justify-content: end;
+            background-color:gainsboro;
+        }
+        .paper-content{
+           flex: 1 1 auto;
+           .text-area{
+           }
+        }
+        .paper-footer{       
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;             
             padding:0.5rem 0.5rem;
-            margin-bottom: 0;
         }
         &:hover{
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.24);

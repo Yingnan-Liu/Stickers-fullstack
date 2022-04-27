@@ -2,7 +2,7 @@ import React from "react";
 import Sticker from "../Sticker/Sticker";
 import "./style.scss";
 
-const Stickerlist = () => {
+const Stickerlist = ({ data }) => {
   return (
     <div className="sticker-list">
       <Sticker />
