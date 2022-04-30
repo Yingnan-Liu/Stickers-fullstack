@@ -1,43 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { IconButton, Chip, Typography, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import { useDebounce } from "../../utils/debounce";
 import "./style.scss";
 
 const Sticker = ({ content }) => {
   const [disable, setDisable] = useState(true);
   const [text, setText] = useState("");
+  const [debouncedText, setDebounceText] = useDebounce("");
   const [isEdit, setIsEdit] = useState(false);
+
+  const handleTextInput = (e) => {
+    setDebounceText(e.target.value);
+  };
 
   const handleEdit = () => {
     setIsEdit(true);
   };
   const handleSave = () => {
     setIsEdit(false);
+    // save request
   };
+  const handleDelete = () => {};
+
+  const handleAdd = () => {};
+
   return (
     <div className="sticker">
       <div className="paper">
         <div className="paper-header">
           <IconButton>
-            <AddIcon />
+            <AddIcon onClick={handleAdd} />
           </IconButton>
         </div>
 
         <div className="paper-content">
           {isEdit ? (
             <TextField
+              variant="outlined"
               className="text-area"
               minRows={7}
               maxRows={7}
-              label="text"
+              label="请输入文本"
               multiline
+              onChange={handleTextInput}
             />
           ) : (
-            <Typography>{text}</Typography>
+            <Typography>{debouncedText}</Typography>
           )}
         </div>
         <div className="paper-footer">
@@ -50,7 +63,7 @@ const Sticker = ({ content }) => {
                 <EditIcon onClick={handleEdit} />
               )}
             </IconButton>
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </div>
