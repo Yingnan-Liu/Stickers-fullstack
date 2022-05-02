@@ -3,9 +3,9 @@ import { IconButton, Chip, Typography, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import { useAuthState } from "../../context";
+// import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import { useDebounce } from "../../utils/debounce";
+import { useDebounce } from "../../utils/useDebounce";
 import "./style.scss";
 
 const Sticker = ({ content }) => {
@@ -31,6 +31,8 @@ const Sticker = ({ content }) => {
 
   return (
     <div className="sticker">
+      {/* <div>{text}</div>
+    <div>{debouncedText}</div> */}
       <div className="paper">
         <div className="paper-header">
           <IconButton>
@@ -46,8 +48,9 @@ const Sticker = ({ content }) => {
               minRows={7}
               maxRows={7}
               label="请输入文本"
+              variant="outlined"
               multiline
-              onChange={handleTextInput}
+              onChange={handleInput}
             />
           ) : (
             <Typography>{debouncedText}</Typography>
@@ -56,14 +59,17 @@ const Sticker = ({ content }) => {
         <div className="paper-footer">
           <Chip className="time-staple" label="2020/4/25" />
           <div className="paper-btns">
-            <IconButton aria-label="edit">
-              {isEdit ? (
-                <AssignmentTurnedInIcon onClick={handleSave} />
-              ) : (
-                <EditIcon onClick={handleEdit} />
-              )}
-            </IconButton>
-            <IconButton aria-label="delete" onClick={handleDelete}>
+            {isEdit ? (
+              <IconButton aria-label="save" onClick={handleSave}>
+                <AssignmentTurnedInIcon />
+              </IconButton>
+            ) : (
+              <IconButton aria-label="edit" onClick={handleEdit}>
+                <EditIcon />
+              </IconButton>
+            )}
+
+            <IconButton aria-label="delete">
               <DeleteIcon />
             </IconButton>
           </div>
