@@ -13,7 +13,7 @@ const getNotes = asyncHandler(async (req, res) => {
 // @route POST /api/goals
 // @access Privat
 const setNote = asyncHandler(async (req, res) => {
-  console.log(`post data req.body: ${req.body}`);
+  console.log("setNote收到的数据: ",req.body);
   if (!req.body.text) {
     res.status(400);
     throw new Error("Please add a text field");
@@ -22,6 +22,7 @@ const setNote = asyncHandler(async (req, res) => {
     text: req.body.text,
     user: req.user.id,  //添加user信息
   });
+  console.log("创建好的note信息:",note)
   res.status(200).json(note);
 });
 
