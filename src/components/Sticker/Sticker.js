@@ -6,28 +6,32 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import { useDebounce } from "../../utils/useDebounce";
+// import { useDebounce } from "../../utils/useDebounce";
 import { setNote } from "./setNote";
+
 
 import "./style.scss";
 
-const Sticker = ({ content }) => {
+const Sticker = ({ note,handleDelete }) => {
   const { token } = useAuthState();
-  const [disable, setDisable] = useState(true);
-  const [debouncedText, setDebounceText] = useDebounce("",200);
+  // const [debouncedText, setDebounceText] = useDebounce("",200);
+
   const [isEdit, setIsEdit] = useState(false);
   //note信息 id,time,text
   const [noteInfo,setNoteInfo] = useState({
-    id:"",
-    text:"",
-    updatedAt:dayjs().format("YYYY/MM/DD")
+    id:note._id||"",
+    text:note.text||"",
+    updatedAt:dayjs(note.updatedAt).format("YYYY/MM/DD")||dayjs().format("YYYY/MM/DD")
   })
   // const [id, setId] = useState("");
   // const [text, setText] = useState("");
   // const [updatedAt, setUpdatedAt] = useState(dayjs().format("YYYY/MM/DD"));
 
   const handleTextInput = (e) => {
-    setDebounceText(e.target.value);
+    setNoteInfo({
+      ...noteInfo,
+      text:e.target.value
+    });
   };
 
   const handleEdit = () => {
@@ -37,7 +41,7 @@ const Sticker = ({ content }) => {
     setIsEdit(false);
     //发送保存请求
     try {
-      const { id, text, updatedAt } = await setNote(noteInfo.id, debouncedText,token);
+      const { id, text, updatedAt } = await setNote(noteInfo.id, noteInfo.text,token);
       setNoteInfo({
         id,text,
         "updatedAt":dayjs(updatedAt).format("YYYY/MM/DD")
@@ -46,9 +50,10 @@ const Sticker = ({ content }) => {
       console.log(error.response.data.message);
     }
   };
-    // save request
 
-  const handleDelete = () => {};
+  const handleNoteDelete=()=>{
+    handleDelete(noteInfo.id)
+  }
 
   return (
     <div className="sticker">
@@ -89,7 +94,7 @@ const Sticker = ({ content }) => {
               </IconButton>
             )}
 
-            <IconButton aria-label="delete" onClick={handleDelete} >
+            <IconButton aria-label="delete" onClick={handleNoteDelete} >
               <DeleteIcon />
             </IconButton>
           </div>

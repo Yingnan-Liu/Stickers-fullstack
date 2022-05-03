@@ -9,7 +9,7 @@ import "./style.scss";
 
 const Home = () => {
   const [isDark, setDark] = useState(false);
-  const { username } = useAuthState();
+  const {username} =useAuthState()
   const dispatch = useAuthDispatch();
   const handleTheme = () => {
     setDark(!isDark);
@@ -17,6 +17,8 @@ const Home = () => {
   const handleLogout = () => {
     logout(dispatch);
   };
+
+
   return (
     <div className="page">
       <div className="header">

@@ -28,3 +28,21 @@ export const updateNote=(id,data,token)=>{
         }
     })
 }
+//请求所有的note
+export const getAllNote=(token)=>{
+    let bearerToken = setToken(token)
+    return axios.get(userApi,{
+        headers:{
+            "Authorization":bearerToken+""
+        }
+    })
+}
+//删除note
+export const deleteNote=(id,token)=>{
+    let bearerToken = setToken(token)
+    return axios.delete(userApi+"/"+id,{
+        headers:{
+            "Authorization":bearerToken+""
+        }
+    })
+}
