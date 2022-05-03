@@ -26,9 +26,10 @@ const Sticker = ({ content }) => {
   // const [text, setText] = useState("");
   // const [updatedAt, setUpdatedAt] = useState(dayjs().format("YYYY/MM/DD"));
 
-  const handleInput = (e) => {
+  const handleTextInput = (e) => {
     setDebounceText(e.target.value);
   };
+
   const handleEdit = () => {
     setIsEdit(true);
   };
@@ -45,6 +46,9 @@ const Sticker = ({ content }) => {
       console.log(error.response.data.message);
     }
   };
+    // save request
+
+  const handleDelete = () => {};
 
   return (
     <div className="sticker">
@@ -60,13 +64,13 @@ const Sticker = ({ content }) => {
         <div className="paper-content">
           {isEdit ? (
             <TextField
+              variant="outlined"
               className="text-area"
               minRows={7}
               maxRows={7}
               label="请输入文本"
-              variant="outlined"
               multiline
-              onChange={handleInput}
+              onChange={handleTextInput}
             />
           ) : (
             <Typography>{noteInfo.text}</Typography>
@@ -85,7 +89,7 @@ const Sticker = ({ content }) => {
               </IconButton>
             )}
 
-            <IconButton aria-label="delete" >
+            <IconButton aria-label="delete" onClick={handleDelete} >
               <DeleteIcon />
             </IconButton>
           </div>
