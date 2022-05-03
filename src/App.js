@@ -5,9 +5,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import { AuthProvider } from "./context";
 
-export const setToken = (token) => {
-  return `Bearer ${token}`;
-};
+
 
 function App() {
   return (

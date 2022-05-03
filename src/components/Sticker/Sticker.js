@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconButton, Chip, Typography, TextField } from "@material-ui/core";
+import dayjs from "dayjs";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-// import { useAuthState } from "../../context";
+import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { useDebounce } from "../../utils/useDebounce";
+import { setNote } from "./setNote";
+
 import "./style.scss";
 
 const Sticker = ({ content }) => {
+  const { token } = useAuthState();
   const [disable, setDisable] = useState(true);
-  const [debouncedText, setDebounceText] = useDebounce();
+  const [debouncedText, setDebounceText] = useDebounce("",200);
   const [isEdit, setIsEdit] = useState(false);
+  //note信息 id,time,text
+  const [noteInfo,setNoteInfo] = useState({
+    id:"",
+    text:"",
+    updatedAt:dayjs().format("YYYY/MM/DD")
+  })
+  // const [id, setId] = useState("");
+  // const [text, setText] = useState("");
+  // const [updatedAt, setUpdatedAt] = useState(dayjs().format("YYYY/MM/DD"));
 
   const handleInput = (e) => {
     setDebounceText(e.target.value);
@@ -19,13 +32,24 @@ const Sticker = ({ content }) => {
   const handleEdit = () => {
     setIsEdit(true);
   };
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsEdit(false);
+    //发送保存请求
+    try {
+      const { id, text, updatedAt } = await setNote(noteInfo.id, debouncedText,token);
+      setNoteInfo({
+        id,text,
+        "updatedAt":dayjs(updatedAt).format("YYYY/MM/DD")
+      })
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
   };
+
   return (
     <div className="sticker">
-      {/* <div>{text}</div>
-    <div>{debouncedText}</div> */}
+      {/* {/* <div>{text}</div> */}
+      {/* <div>{noteInfo.id}</div> */}
       <div className="paper">
         <div className="paper-header">
           <IconButton>
@@ -45,23 +69,23 @@ const Sticker = ({ content }) => {
               onChange={handleInput}
             />
           ) : (
-            <Typography>{debouncedText}</Typography>
+            <Typography>{noteInfo.text}</Typography>
           )}
         </div>
         <div className="paper-footer">
-          <Chip className="time-staple" label="2020/4/25" />
+          <Chip className="time-staple" label={noteInfo.updatedAt} />
           <div className="paper-btns">
             {isEdit ? (
-              <IconButton aria-label="save"  onClick={handleSave}>
+              <IconButton aria-label="save" onClick={handleSave}>
                 <AssignmentTurnedInIcon />
               </IconButton>
             ) : (
-              <IconButton aria-label="edit" onClick={handleEdit} >
+              <IconButton aria-label="edit" onClick={handleEdit}>
                 <EditIcon />
               </IconButton>
             )}
 
-            <IconButton aria-label="delete">
+            <IconButton aria-label="delete" >
               <DeleteIcon />
             </IconButton>
           </div>

@@ -59,7 +59,7 @@ export default function SignUp(props) {
       console.log("onsubmit response:", response); //email name token
     } catch (error) {
       console.log("error msg", error.response.data.message);
-      // setMsg(error.response.data.message);
+      setMsg(error.response.data.message);
       // setOpen(true);
     }
     // //注册成功跳转登录页面

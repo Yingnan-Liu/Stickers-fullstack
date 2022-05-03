@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:5000";
+import { baseUrl } from "./config";
 
 const api = {
   signup: `${baseUrl}/api/users/signup`,
