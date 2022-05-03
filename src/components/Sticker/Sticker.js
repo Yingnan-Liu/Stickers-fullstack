@@ -48,7 +48,6 @@ const Sticker = ({ content }) => {
               minRows={7}
               maxRows={7}
               label="请输入文本"
-              variant="outlined"
               multiline
               onChange={handleInput}
             />
