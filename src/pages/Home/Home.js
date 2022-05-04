@@ -9,7 +9,7 @@ import "./style.scss";
 
 const Home = () => {
   const [isDark, setDark] = useState(false);
-  const {username} =useAuthState()
+  const { username } = useAuthState();
   const dispatch = useAuthDispatch();
   const handleTheme = () => {
     setDark(!isDark);
@@ -18,14 +18,13 @@ const Home = () => {
     logout(dispatch);
   };
 
-
   return (
     <div className="page">
       <div className="header">
         <div className="top-bar">
           <div className="title">
-            <h4 className="logo">📋 </h4>
-            <h4 className="titlename">Stickers</h4>
+            <span className="logo">📋</span>
+            <span className="titlename">Stickers</span>
           </div>
           <ul className="btn-area">
             <li className="change-theme">

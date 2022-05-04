@@ -2,35 +2,30 @@ import React, { useState, useEffect } from "react";
 import { IconButton, Chip, Typography, TextField } from "@material-ui/core";
 import dayjs from "dayjs";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-// import { useDebounce } from "../../utils/useDebounce";
 import { updateNote } from "../../service/notes";
-
 
 import "./style.scss";
 
-const Sticker = ({ note,handleDelete }) => {
+const Sticker = ({ note, handleDelete }) => {
   const { token } = useAuthState();
   // const [debouncedText, setDebounceText] = useDebounce("",200);
 
   const [isEdit, setIsEdit] = useState(false);
   //note信息 id,time,text
-  const [noteInfo,setNoteInfo] = useState({
-    id:note._id||"",
-    text:note.text||"",
-    updatedAt:dayjs(note.updatedAt).format("YYYY/MM/DD")||dayjs().format("YYYY/MM/DD")
-  })
-  // const [id, setId] = useState("");
-  // const [text, setText] = useState("");
-  // const [updatedAt, setUpdatedAt] = useState(dayjs().format("YYYY/MM/DD"));
-
+  const [noteInfo, setNoteInfo] = useState({
+    id: note._id || "",
+    text: note.text || "",
+    updatedAt:
+      dayjs(note.updatedAt).format("YYYY/MM/DD") ||
+      dayjs().format("YYYY/MM/DD"),
+  });
   const handleTextInput = (e) => {
     setNoteInfo({
       ...noteInfo,
-      text:e.target.value
+      text: e.target.value,
     });
   };
 
@@ -39,23 +34,31 @@ const Sticker = ({ note,handleDelete }) => {
   };
   const handleSave = async () => {
     setIsEdit(false);
-    //发送保存请求
-    try {
-      const response = await updateNote(noteInfo.id, noteInfo.text,token);
-      const { _id, text, updatedAt } = response.data
-      setNoteInfo({
-        id:_id,
-        text,
-        "updatedAt":dayjs(updatedAt).format("YYYY/MM/DD")
-      })
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
   };
 
-  const handleNoteDelete=()=>{
-    handleDelete(noteInfo.id)
-  }
+  const handleNoteDelete = () => {
+    handleDelete(noteInfo.id);
+  };
+
+  useEffect(() => {
+    const clickSave = async () => {
+      try {
+        console.log("发送save请求");
+        const response = await updateNote(noteInfo.id, noteInfo.text, token);
+        const { _id, text, updatedAt } = response.data;
+        setNoteInfo({
+          id: _id,
+          text,
+          updatedAt: dayjs(updatedAt).format("YYYY/MM/DD"),
+        });
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    if (isEdit == false) {
+      clickSave();
+    }
+  }, [noteInfo.text, isEdit]);
 
   return (
     <div className="sticker">
@@ -63,11 +66,10 @@ const Sticker = ({ note,handleDelete }) => {
       {/* <div>{noteInfo.id}</div> */}
       <div className="paper">
         <div className="paper-header">
-          <IconButton>
-            <AddIcon />
+          <IconButton aria-label="delete" onClick={handleNoteDelete}>
+            <CloseIcon />
           </IconButton>
         </div>
-
         <div className="paper-content">
           {isEdit ? (
             <TextField
@@ -77,7 +79,9 @@ const Sticker = ({ note,handleDelete }) => {
               maxRows={7}
               label="请输入文本"
               multiline
+              defaultValue={isEdit && noteInfo.text}
               onChange={handleTextInput}
+              type="text"
             />
           ) : (
             <Typography>{noteInfo.text}</Typography>
@@ -95,10 +99,6 @@ const Sticker = ({ note,handleDelete }) => {
                 <EditIcon />
               </IconButton>
             )}
-
-            <IconButton aria-label="delete" onClick={handleNoteDelete} >
-              <DeleteIcon />
-            </IconButton>
           </div>
         </div>
       </div>
