@@ -22,7 +22,7 @@ export const updateNote=(id,data,token)=>{
     return axios({
         method:"PUT",
         url:userApi+"/"+id,
-        data,
+        data:{text:data},
         headers:{
             "Authorization":bearerToken+""
         }

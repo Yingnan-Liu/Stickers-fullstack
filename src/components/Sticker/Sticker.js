@@ -7,7 +7,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { useAuthState } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 // import { useDebounce } from "../../utils/useDebounce";
-import { setNote } from "./setNote";
+import { updateNote } from "../../service/notes";
 
 
 import "./style.scss";
@@ -41,9 +41,11 @@ const Sticker = ({ note,handleDelete }) => {
     setIsEdit(false);
     //发送保存请求
     try {
-      const { id, text, updatedAt } = await setNote(noteInfo.id, noteInfo.text,token);
+      const response = await updateNote(noteInfo.id, noteInfo.text,token);
+      const { _id, text, updatedAt } = response.data
       setNoteInfo({
-        id,text,
+        id:_id,
+        text,
         "updatedAt":dayjs(updatedAt).format("YYYY/MM/DD")
       })
     } catch (error) {
