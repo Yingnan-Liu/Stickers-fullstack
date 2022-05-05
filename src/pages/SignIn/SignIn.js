@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
+export default function SignIn() {
   const classes = useStyles();
   const navigate = useNavigate();
   const [msg, setMsg] = useState(undefined);
@@ -55,34 +55,27 @@ export default function SignIn(props) {
   } = useForm();
   // 发送登录请求
   const onSubmit = async (data) => {
-    try {
+    try{
       const response = await loginUser(dispatch, data);
-      console.log("onsubmit response:", response); //email name token
-      if (errorMessage) {
-        setOpen(true);
-      }
+      console.log("onsubmit response:", response); //email name token     
       if (response) {
         navigate("/");
       }
     } catch (error) {
-      console.log("signin中捕获", error);
-      // setMsg(error.response.data.message);
-    }
+        console.log("action err", error.response.data.message);
+        dispatch({ type: "LOGIN_ERROR", error: error.response.data.message });
+        setOpen(true);
+      }
   };
-  const handleClose = () => {
-    setOpen(false);
-    // if(){}
-    // navigate("/");
-  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Snackbar
         open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
+        autoHideDuration={6000}       
         message={errorMessage}
         action={
-          <IconButton>
+          <IconButton  onClick={()=>setOpen(false)}>
             <CloseIcon />
           </IconButton>
         }
@@ -127,10 +120,6 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"
