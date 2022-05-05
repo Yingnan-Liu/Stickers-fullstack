@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { IconButton, Chip, Typography, TextField } from "@material-ui/core";
+import { IconButton, Chip, Typography, TextField ,Snackbar} from "@material-ui/core";
 import dayjs from "dayjs";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
-import { useAuthState } from "../../context";
+import { useAuthState,useAuthDispatch } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { updateNote } from "../../service/notes";
 
 import "./style.scss";
 
 const Sticker = ({ note, handleDelete }) => {
-  const { token } = useAuthState();
+  const { token,errorMessage } = useAuthState();
   // const [debouncedText, setDebounceText] = useDebounce("",200);
-
+  const dispatch = useAuthDispatch();
   const [isEdit, setIsEdit] = useState(false);
+  const [open,setOpen]=useState(false)
+
   //note信息 id,time,text
   const [noteInfo, setNoteInfo] = useState({
     id: note._id || "",
@@ -53,17 +55,27 @@ const Sticker = ({ note, handleDelete }) => {
         });
       } catch (error) {
         console.log(error.response.data.message);
+        dispatch({type:"MESSAGE",error:error.response.data.message})
+        setOpen(true)
       }
     };
-    if (isEdit == false) {
+    if (isEdit === false) {
       clickSave();
     }
   }, [noteInfo.text, isEdit]);
 
   return (
     <div className="sticker">
-      {/* {/* <div>{text}</div> */}
-      {/* <div>{noteInfo.id}</div> */}
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}       
+        message={errorMessage}
+        action={
+          <IconButton  onClick={()=>setOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+        }
+      />
       <div className="paper">
         <div className="paper-header">
           <IconButton aria-label="delete" onClick={handleNoteDelete}>

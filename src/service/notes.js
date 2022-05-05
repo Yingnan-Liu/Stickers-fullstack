@@ -24,7 +24,7 @@ export const updateNote=(id,data,token)=>{
         url:userApi+"/"+id,
         data:{text:data},
         headers:{
-            "Authorization":bearerToken+""
+            // "Authorization":bearerToken+""
         }
     })
 }

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Sticker from "../Sticker/Sticker";
-import Fab from "@material-ui/core/Fab";
+import {Fab,Snackbar,IconButton} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+
 import { deleteNote, getAllNote, saveNote } from "../../service/notes";
-import { useAuthState } from "../../context";
+import { useAuthState,useAuthDispatch } from "../../context";
 import AddNoteDialog from "../AddNoteDialog.js/AddNoteDialog";
 import "./style.scss";
 
 const Stickerlist = () => {
-  const { username, token } = useAuthState();
+  const { username, token,errorMessage } = useAuthState();
   const [dataList, setDataList] = useState([]);
   const [open, setOpen] = useState(false);
+  const dispatch = useAuthDispatch();
 
-  console.log("username", username);
   useEffect(() => {
     if (username) {
       getAllNote(token)
@@ -22,6 +23,7 @@ const Stickerlist = () => {
         })
         .catch((err) => {
           console.log(err.response.data.message);
+          dispatch({type:"MESSAGE",error:err.response.data.message})
         });
     }
   }, [username, token]);
@@ -33,6 +35,7 @@ const Stickerlist = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
+      dispatch({type:"MESSAGE",error:error.response.data.message})
     }
   };
   const handleAddBtn = () => {

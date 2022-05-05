@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { IconButton, Button, TextField } from "@material-ui/core";
+import React, { useState,useEffect } from "react";
+import { IconButton, Button, TextField,Snackbar } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import CloseIcon from "@material-ui/icons/Close";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import StickerList from "../../components/StickerList/StickerList";
@@ -9,7 +10,8 @@ import "./style.scss";
 
 const Home = () => {
   const [isDark, setDark] = useState(false);
-  const { username } = useAuthState();
+  const { username,errorMessage } = useAuthState();
+  const [open,setOpen]=useState(false)
   const dispatch = useAuthDispatch();
   const handleTheme = () => {
     setDark(!isDark);
@@ -17,6 +19,10 @@ const Home = () => {
   const handleLogout = () => {
     logout(dispatch);
   };
+
+  useEffect(()=>{
+    errorMessage && setOpen(true)
+  },[errorMessage])
 
   return (
     <div className="page">
@@ -62,6 +68,16 @@ const Home = () => {
       <div className="sticker-list-area">
         <StickerList />
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}       
+        message={errorMessage}
+        action={
+          <IconButton  onClick={()=>setOpen(false)}>
+            <CloseIcon />
+          </IconButton>
+        }
+      />
     </div>
   );
 };
