@@ -15,6 +15,7 @@ const Sticker = ({ note, handleDelete }) => {
   const dispatch = useAuthDispatch();
   const [isEdit, setIsEdit] = useState(false);
   const [open,setOpen]=useState(false)
+  const [inputText,setInputText] =useState(note.text || "")
 
   //note信息 id,time,text
   const [noteInfo, setNoteInfo] = useState({
@@ -25,10 +26,11 @@ const Sticker = ({ note, handleDelete }) => {
       dayjs().format("YYYY/MM/DD"),
   });
   const handleTextInput = (e) => {
-    setNoteInfo({
-      ...noteInfo,
-      text: e.target.value,
-    });
+    // setNoteInfo({
+    //   ...noteInfo,
+    //   text: e.target.value,
+    // });
+    setInputText(e.target.value)
   };
 
   const handleEdit = () => {
@@ -46,7 +48,7 @@ const Sticker = ({ note, handleDelete }) => {
     const clickSave = async () => {
       try {
         console.log("发送save请求");
-        const response = await updateNote(noteInfo.id, noteInfo.text, token);
+        const response = await updateNote(noteInfo.id, inputText, token);
         const { _id, text, updatedAt } = response.data;
         setNoteInfo({
           id: _id,
@@ -59,7 +61,7 @@ const Sticker = ({ note, handleDelete }) => {
         setOpen(true)
       }
     };
-    if (isEdit === false) {
+    if (isEdit === false && noteInfo.text!==inputText) {
       clickSave();
     }
   }, [noteInfo.text, isEdit]);

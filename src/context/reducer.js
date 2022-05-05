@@ -27,6 +27,7 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         username: "",
         token: "",
+        errorMessage: null,
       };
     case "LOGIN_ERROR":
       return {

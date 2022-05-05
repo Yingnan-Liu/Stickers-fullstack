@@ -21,9 +21,14 @@ const Home = () => {
   };
 
   useEffect(()=>{
-    errorMessage && setOpen(true)
+    if(errorMessage) {
+      setOpen(true)
+    } 
   },[errorMessage])
-
+  const handleClose=()=>{
+    setOpen(false)
+    dispatch({type:"MESSAGE",error:null})
+  }
   return (
     <div className="page">
       <div className="header">
@@ -73,7 +78,7 @@ const Home = () => {
         autoHideDuration={6000}       
         message={errorMessage}
         action={
-          <IconButton  onClick={()=>setOpen(false)}>
+          <IconButton  onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         }

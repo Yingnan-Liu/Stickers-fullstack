@@ -106,7 +106,7 @@ export default function SignIn() {
             fullWidth
             label="Email Address"
             autoFocus
-            defaultValue={JSON.parse(localStorage.getItem("currentUser")).email||""}
+            defaultValue={JSON.parse(localStorage.getItem("currentUser"))?.email||""}
           />
           <TextField
             variant="outlined"
