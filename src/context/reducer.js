@@ -34,11 +34,16 @@ export const AuthReducer = (initialState, action) => {
         loading: false,
         errorMessage: action.error,
       };
-    case "ERROR":
+    case "MESSAGE":
       return {
         ...initialState,
         loading: false,
         errorMessage: action.error,
+      }
+    case "LOADING":
+      return {
+        ...initialState,
+        loading: true,
       }
 
     default:

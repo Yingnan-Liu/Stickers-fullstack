@@ -20,3 +20,13 @@ export async function logout(dispatch) {
   dispatch({ type: "LOGOUT" }); //initialState制空
   localStorage.removeItem("currentUser");
 }
+
+export async function signUpUser(dispatch,signUpPayload){
+  const response = await axios.post(baseUrl + "/api/users/signup", signUpPayload);
+  const data =response.data
+  if(data){
+    dispatch({ type: "MESSAGE", error: "注册成功！✨" });
+    // localStorage.setItem("currentUser", JSON.stringify(data));
+    return data
+  }
+}

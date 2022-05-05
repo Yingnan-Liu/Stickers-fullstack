@@ -19,6 +19,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
 import { signUp } from "../../service/user";
+import {signUpUser} from "../../context/actions"
+import { useAuthDispatch ,useAuthState} from "../../context";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +47,8 @@ export default function SignUp(props) {
   const navigate = useNavigate();
   const [msg, setMsg] = useState(undefined);
   const [open, setOpen] = useState(false);
+  const dispatch = useAuthDispatch();
+  const {errorMessage} =useAuthState();
   const {
     register,
     handleSubmit,
@@ -53,21 +57,22 @@ export default function SignUp(props) {
   // 发送注册请求
   const onSubmit = async (data) => {
     try {
-      const response = await signUp(data);
-      setMsg("注册成功！✨");
+      // const response = await signUp(data);
+      const response = await signUpUser(dispatch,data) 
+      // dispatch({ type: "MESSAGE", error: "注册成功！✨" });
+      localStorage.setItem("currentUser", JSON.stringify(response))
       setOpen(true);
-      console.log("onsubmit response:", response); //email name token
     } catch (error) {
       console.log("error msg", error.response.data.message);
-      setMsg(error.response.data.message);
-      // setOpen(true);
+      dispatch({ type: "MESSAGE", error: error.response.data.message });
+      setOpen(true);
     }
-    // //注册成功跳转登录页面
-    // navigate("/signin");
   };
   const handleClose = () => {
     setOpen(false);
-    navigate("/signin");
+    if(localStorage.getItem("currentUser")){
+      navigate("/signin");
+    }
   };
   console.log("props", props);
   console.log("errors", errors);
@@ -77,7 +82,7 @@ export default function SignUp(props) {
         open={open}
         autoHideDuration={6000}
         onClose={() => setOpen(!open)}
-        message={msg}
+        message={errorMessage}
         action={
           <IconButton onClick={handleClose}>
             <CloseIcon />

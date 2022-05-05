@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [msg, setMsg] = useState(undefined);
   const [open, setOpen] = useState(false);
   const { errorMessage } = useAuthState();
   const dispatch = useAuthDispatch();
