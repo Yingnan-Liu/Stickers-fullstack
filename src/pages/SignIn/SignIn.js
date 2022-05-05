@@ -4,8 +4,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Typography,
@@ -108,6 +106,7 @@ export default function SignIn() {
             fullWidth
             label="Email Address"
             autoFocus
+            defaultValue={JSON.parse(localStorage.getItem("currentUser")).email||""}
           />
           <TextField
             variant="outlined"

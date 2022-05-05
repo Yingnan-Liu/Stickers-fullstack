@@ -18,7 +18,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
-import { signUp } from "../../service/user";
 import {signUpUser} from "../../context/actions"
 import { useAuthDispatch ,useAuthState} from "../../context";
 
@@ -45,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp(props) {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [msg, setMsg] = useState(undefined);
   const [open, setOpen] = useState(false);
   const dispatch = useAuthDispatch();
   const {errorMessage} =useAuthState();
@@ -57,9 +55,7 @@ export default function SignUp(props) {
   // 发送注册请求
   const onSubmit = async (data) => {
     try {
-      // const response = await signUp(data);
       const response = await signUpUser(dispatch,data) 
-      // dispatch({ type: "MESSAGE", error: "注册成功！✨" });
       localStorage.setItem("currentUser", JSON.stringify(response))
       setOpen(true);
     } catch (error) {
