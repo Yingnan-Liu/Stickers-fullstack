@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { IconButton, Chip, Typography, TextField ,Snackbar} from "@material-ui/core";
 import dayjs from "dayjs";
 import EditIcon from "@material-ui/icons/Edit";
@@ -6,7 +6,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useAuthState,useAuthDispatch } from "../../context";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import { updateNote } from "../../service/notes";
-
+import { ThemeContext } from "../../App";
 import "./style.scss";
 
 const Sticker = ({ note, handleDelete }) => {
@@ -16,6 +16,7 @@ const Sticker = ({ note, handleDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [open,setOpen]=useState(false)
   const [inputText,setInputText] =useState(note.text || "")
+  const {theme} = useContext(ThemeContext)
 
   //note信息 id,time,text
   const [noteInfo, setNoteInfo] = useState({
@@ -78,7 +79,7 @@ const Sticker = ({ note, handleDelete }) => {
           </IconButton>
         }
       />
-      <div className="paper">
+      <div className={theme==="dark"?"paper-dark":"paper"} >
         <div className="paper-header">
           <IconButton aria-label="delete" onClick={handleNoteDelete}>
             <CloseIcon />

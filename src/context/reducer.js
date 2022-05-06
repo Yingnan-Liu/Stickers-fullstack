@@ -10,6 +10,7 @@ export const initialState = {
   token: "" || token,
   loading: false,
   errorMessage: null,
+  dark:false
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -46,6 +47,11 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         loading: true,
       };
+      case "DARK-MODE":
+        return {
+          ...initialState,
+          dark:action.darkmode
+        }
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -3,13 +3,13 @@ $resize-width:1000px;
 .add-note-btn{
     position:absolute;
     right:40px;
-    top:230px;
+    top:130px;
     opacity: 0.2;
     transition: opacity 0.5s ease;
 }
 .add-note-btn:hover{
     opacity: 0.8;
-}
+} 
 
 .sticker-list{
     width:80vw;

@@ -1,9 +1,9 @@
+
 body{
     height:100vh;
     padding: 0;
     margin:0;
     scroll-behavior: smooth;
-    
     &::-webkit-scrollbar{
         width:8px;
     }
@@ -11,5 +11,10 @@ body{
         background: rgb(224, 223, 223); // 滑块颜色
         border-radius: 5px; // 滑块圆角
     }
-
+    transition: background-color ease 1s;
+    &.dark{
+        background-color: #333333;
+        color: #d6d6d6;
+    }
+    
 }

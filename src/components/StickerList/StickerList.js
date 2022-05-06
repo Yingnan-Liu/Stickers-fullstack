@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sticker from "../Sticker/Sticker";
-import {Fab,Snackbar,IconButton} from "@material-ui/core";
+import {Fab} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 import { deleteNote, getAllNote, saveNote } from "../../service/notes";
@@ -9,7 +9,7 @@ import AddNoteDialog from "../AddNoteDialog.js/AddNoteDialog";
 import "./style.scss";
 
 const Stickerlist = () => {
-  const { username, token,errorMessage } = useAuthState();
+  const { username, token } = useAuthState();
   const [dataList, setDataList] = useState([]);
   const [open, setOpen] = useState(false);
   const dispatch = useAuthDispatch();
@@ -42,7 +42,8 @@ const Stickerlist = () => {
     setOpen(true);
   };
   const handleAddNote = async (curr_text) => {
-    const response = await saveNote({ text: curr_text }, token);
+    try{
+      const response = await saveNote({ text: curr_text }, token);
     console.log("save note返回:", response.data);
     setDataList([
       ...dataList,
@@ -50,6 +51,9 @@ const Stickerlist = () => {
         ...response.data,
       },
     ]);
+    }catch(error){
+      dispatch({type:"MESSAGE",error:error.response.data.message})
+    }
     setOpen(false);
   };
   const handleClose = () => {

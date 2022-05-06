@@ -5,10 +5,16 @@ import axios from "axios";
 //axios发Auth
 const userApi=`${baseUrl}/api/notes`
 
+//将text中的\n换为《br/》
+
 //保存note
 export const saveNote=(data,token)=>{
     let bearerToken = setToken(token)
+    // let {text}=data
+    // let newText=text.replace('/\n/g','<br/>')
+    // data.text=newText
     console.log("token here:::",bearerToken)
+    console.log("newData",data)
     return axios.post(userApi,data,{
         headers:{
             "Authorization":bearerToken+""
