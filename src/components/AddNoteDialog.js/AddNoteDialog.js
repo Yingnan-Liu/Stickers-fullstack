@@ -18,7 +18,7 @@ export default function AddNoteDialog({ open, handleClose ,handleAddNote}) {
   return (
     <div  >
       <Dialog 
-      className={theme==='dark'&&"darkDialog"}
+      className={theme==='dark'?"darkDialog":""}
       maxWidth="xs" 
       fullWidth
       open={open} 

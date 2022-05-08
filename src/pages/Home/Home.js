@@ -2,10 +2,13 @@ import React, { useState,useEffect,useContext } from "react";
 import { IconButton, Button, TextField,Snackbar } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
+import SearchIcon from "@material-ui/icons/Search"
+import { SearchOutlined } from "@material-ui/icons";
 import WbSunnyIcon from "@material-ui/icons/WbSunny";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import StickerList from "../../components/StickerList/StickerList";
 import { useAuthDispatch, useAuthState, logout } from "../../context";
+import {useDebounce} from "../../utils/useDebounce"
 import { ThemeContext } from "../../App";
 import "./style.scss";
 
@@ -14,6 +17,8 @@ const Home = () => {
   const [open,setOpen]=useState(false)
   const dispatch = useAuthDispatch();
   const {theme,toggleTheme} = useContext(ThemeContext)
+  const [debouncedText, setDebounceText] = useDebounce("",200);
+  const [search,setSearch] =useState("")
   const body=document.body
 
   const handleTheme=()=>{
@@ -21,7 +26,7 @@ const Home = () => {
   }
   useEffect(()=>{
     console.log("theme",theme)
-    if(theme=="light"){
+    if(theme==="light"){
       body.classList.remove("dark")
     }else{
       body.classList.add("dark")
@@ -42,7 +47,14 @@ const Home = () => {
   // useEffect(()=>{
   //   dispatch({type:"DARK-MODE",darkmode:isDark})
   // },[isDark])
-
+  const handleSearch=(e)=>{
+    setDebounceText(e.target.value)
+  }
+  const handleClick=()=>{
+    setSearch(debouncedText)
+    console.log("debouncedText",debouncedText)
+    if(debouncedText==="") setSearch("")
+  }
   const handleClose=()=>{
     setOpen(false)
     dispatch({type:"MESSAGE",error:null})
@@ -85,11 +97,14 @@ const Home = () => {
           </ul>
         </div>
         <div className="search-area">
-          <TextField id="search-input" fullwidth label="search"  />
+          <TextField id="search-input"  label="search" onChange={handleSearch}  />
+          <Button className="search-btn" onClick={handleClick}>
+          <SearchOutlined/>
+          </Button>
         </div>
       </div>
       <div className="sticker-list-area">
-        <StickerList />
+        <StickerList search={search} />
       </div>
       <Snackbar
         open={open}

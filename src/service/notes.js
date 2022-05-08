@@ -52,3 +52,15 @@ export const deleteNote=(id,token)=>{
         }
     })
 }
+
+export const searchNote=(text,token)=>{
+    let bearerToken = setToken(token)
+    return axios.post(userApi+"/search",{},{
+        headers:{
+            "Authorization":bearerToken+""
+        },
+        params:{
+            text
+        }
+    })
+}

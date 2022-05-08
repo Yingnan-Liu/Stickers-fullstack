@@ -47,11 +47,6 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         loading: true,
       };
-      case "DARK-MODE":
-        return {
-          ...initialState,
-          dark:action.darkmode
-        }
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

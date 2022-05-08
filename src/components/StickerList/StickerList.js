@@ -3,19 +3,18 @@ import Sticker from "../Sticker/Sticker";
 import {Fab} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import { deleteNote, getAllNote, saveNote } from "../../service/notes";
+import { deleteNote, getAllNote, saveNote,searchNote } from "../../service/notes";
 import { useAuthState,useAuthDispatch } from "../../context";
 import AddNoteDialog from "../AddNoteDialog.js/AddNoteDialog";
 import "./style.scss";
 
-const Stickerlist = () => {
+const Stickerlist = ({search}) => {
   const { username, token } = useAuthState();
   const [dataList, setDataList] = useState([]);
   const [open, setOpen] = useState(false);
   const dispatch = useAuthDispatch();
-
   useEffect(() => {
-    if (username) {
+    if (username ) {
       getAllNote(token)
         .then((res) => {
           console.log(res);
@@ -26,7 +25,16 @@ const Stickerlist = () => {
           dispatch({type:"MESSAGE",error:err.response.data.message})
         });
     }
-  }, [username, token]);
+  }, [username]);
+  useEffect(()=>{
+    // let searchResult
+    console.log("search in list:",search)
+
+    search&&searchNote(search,token).then((res)=>{
+      console.log("res",res)
+      setDataList(res.data)
+  })
+  },[search])
   const handleDelete = async (id) => {
     console.log(`delete note id ${id}`);
     try {
