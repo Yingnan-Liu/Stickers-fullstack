@@ -1,0 +1,9 @@
+.darkDialog {
+    .MuiDialog-paper{
+        background-color: rgb(72, 72, 72);
+        color:rgb(196, 196, 196);
+        .MuiInputBase-input{
+            color:rgb(196, 196, 196);
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Sticker from "../Sticker/Sticker";
 import {Fab} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -61,8 +61,9 @@ const Stickerlist = () => {
   };
   return (
     <React.Fragment>
-      <div className="add-note-dialog">
+      <div >
         <AddNoteDialog
+          
           open={open}
           handleClose={handleClose}
           handleAddNote={handleAddNote}

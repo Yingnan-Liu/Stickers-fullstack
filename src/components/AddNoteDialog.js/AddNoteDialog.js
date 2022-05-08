@@ -1,21 +1,24 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import styles from "./styles.module.scss"
+import "./styles.scss"
+import { ThemeContext } from "../../App";
+
 export default function AddNoteDialog({ open, handleClose ,handleAddNote}) {
     const [text,setText]=useState("")
+    const { theme } = useContext(ThemeContext);
     const handleSaveNote=()=>{
         handleAddNote(text)
         setText("")
     }
   return (
-    <div>
+    <div  >
       <Dialog 
-      className={styles.noteDialog} 
+      className={theme==='dark'&&"darkDialog"}
       maxWidth="xs" 
       fullWidth
       open={open} 
