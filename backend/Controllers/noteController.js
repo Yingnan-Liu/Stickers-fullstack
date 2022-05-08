@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler"); //express中使用async await
 const Note = require("../models/noteModel"); //导入Note model 可以通过Note调用各种mongoose方法 增删查改
+const { where } = require("../models/userModel");
 const User = require("../models/userModel"); // 导入User model在updateNote中先检查user
 // @desc   Get notes
 // @route GET /api/goals
@@ -83,10 +84,24 @@ const deleteNote = asyncHandler(async (req, res) => {
   await note.remove();
   res.status(200).json({ id: req.params.id });
 });
+// @desc   search notes
+// @route post /api/notes/find
+// @access Private
+const searchNote = asyncHandler(async(req,res)=>{
+  console.log("axios发来的数据",req.query)
+  const searchText=req.query.text
+  const reg=new RegExp(".*"+searchText+".*")
+  const notes = await Note.find({text:{$regex:reg}})
+ 
+  res.status(200).json(notes)
+})
+
+
 
 module.exports = {
   getNotes,
   setNote,
   updateNote,
   deleteNote,
+  searchNote
 };

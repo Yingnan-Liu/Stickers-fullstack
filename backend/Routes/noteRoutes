@@ -5,16 +5,19 @@ const {
   setNote,
   updateNote,
   deleteNote,
+  searchNote
 } = require("../controllers/noteController");
 
 const { protect } = require("../middleware/authMiddleware.");
 
 router.get("/", protect, getNotes);
 router.post("/", protect, setNote);
+router.post("/search",protect,searchNote)
 // router.route('/').get(getNotes).post(setNote)
 
 router.put("/:id", protect, updateNote);
 router.delete("/:id", protect, deleteNote);
+
 // router.route('/:id).put(updateNote).delete(deleteNote)
 
 module.exports = router;
