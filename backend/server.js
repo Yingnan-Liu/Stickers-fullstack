@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000;
 connectDB(); //连接数据库
 const app = express();
 
+app.use(express.static('build')) //express内置中间件，获取前端静态内容
 app.use(express.json()); //解析req.body
 app.use(express.urlencoded({ extended: false }));
 
