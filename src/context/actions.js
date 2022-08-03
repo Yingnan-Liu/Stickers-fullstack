@@ -1,9 +1,11 @@
 import axios from "axios";
-const baseUrl = "http://localhost:5000";
+const baseUrl = "/api/users";
+
+
 
 export async function loginUser(dispatch, loginPayload) {
   // try {
-    let response = await axios.post(baseUrl + "/api/users/login", loginPayload);
+    let response = await axios.post(baseUrl + "/login", loginPayload);
     let data = response.data;
     if (data) {
       dispatch({ type: "LOGIN_SUCCESS", payload: data });
@@ -22,7 +24,7 @@ export async function logout(dispatch) {
 }
 
 export async function signUpUser(dispatch,signUpPayload){
-  const response = await axios.post(baseUrl + "/api/users/signup", signUpPayload);
+  const response = await axios.post(baseUrl + "/signup", signUpPayload);
   const data =response.data
   if(data){
     dispatch({ type: "MESSAGE", error: "注册成功！✨" });

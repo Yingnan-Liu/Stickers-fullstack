@@ -1,9 +1,10 @@
-import { baseUrl } from "./config";
+// import { baseUrl } from "./config";
 import {setToken} from "./config"
 import axios from "axios";
 
 //axios发Auth
-const userApi=`${baseUrl}/api/notes`
+// const userApi=`${baseUrl}/api/notes`
+const baseUrl="/api/notes"
 
 //将text中的\n换为《br/》
 
@@ -15,7 +16,7 @@ export const saveNote=(data,token)=>{
     // data.text=newText
     console.log("token here:::",bearerToken)
     console.log("newData",data)
-    return axios.post(userApi,data,{
+    return axios.post(baseUrl,data,{
         headers:{
             "Authorization":bearerToken+""
         }
@@ -27,7 +28,7 @@ export const updateNote=(id,data,token)=>{
     console.log("token here:::",bearerToken)
     return axios({
         method:"PUT",
-        url:userApi+"/"+id,
+        url:baseUrl+"/"+id,
         data:{text:data},
         headers:{
             "Authorization":bearerToken+""
@@ -37,7 +38,7 @@ export const updateNote=(id,data,token)=>{
 //请求所有的note
 export const getAllNote=(token)=>{
     let bearerToken = setToken(token)
-    return axios.get(userApi,{
+    return axios.get(baseUrl,{
         headers:{
             "Authorization":bearerToken+""
         }
@@ -46,7 +47,7 @@ export const getAllNote=(token)=>{
 //删除note
 export const deleteNote=(id,token)=>{
     let bearerToken = setToken(token)
-    return axios.delete(userApi+"/"+id,{
+    return axios.delete(baseUrl+"/"+id,{
         headers:{
             "Authorization":bearerToken+""
         }
@@ -55,7 +56,7 @@ export const deleteNote=(id,token)=>{
 
 export const searchNote=(text,token)=>{
     let bearerToken = setToken(token)
-    return axios.post(userApi+"/search",{},{
+    return axios.post(baseUrl+"/search",{},{
         headers:{
             "Authorization":bearerToken+""
         },
