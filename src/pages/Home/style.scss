@@ -15,6 +15,7 @@
             justify-content: space-around;
             align-items: center;
             margin-left:1rem;
+            cursor: pointer;
             .logo,.titlename{
                 font-size:1.5rem;
                 font-family: 'Oleo Script', cursive;
@@ -42,7 +43,7 @@
         #search-input{
             width:30rem;
             height:1rem;
-          
+         
             // border-radius: 1rem;
             // background-color: antiquewhite;
         }

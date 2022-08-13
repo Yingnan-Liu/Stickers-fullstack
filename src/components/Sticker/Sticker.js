@@ -99,7 +99,7 @@ const Sticker = ({ note, handleDelete }) => {
               type="text"
             />
           ) : (
-            <Typography>{noteInfo.text}</Typography>
+            <Typography className="text-typo">{noteInfo.text}</Typography>
           )}
         </div>
         <div className="paper-footer">

@@ -14,6 +14,8 @@ import "./style.scss";
 
 const Home = () => {
   const { username,errorMessage } = useAuthState();
+
+
   const [open,setOpen]=useState(false)
   const dispatch = useAuthDispatch();
   const {theme,toggleTheme} = useContext(ThemeContext)
@@ -59,13 +61,17 @@ const Home = () => {
     setOpen(false)
     dispatch({type:"MESSAGE",error:null})
   }
-  const toHomePage=()=>{}
+  const toHomePage=()=>{
+    window.location.reload()
+  }
   return (
     <div className="page">
       <div className={theme==="dark" ? "header-dark":"header"}>
         <div className="top-bar">
           <div className="title" onClick={toHomePage}>
-            <span className="logo">📋</span>
+            <span className="logo">
+            📋
+            </span>           
             <span className="titlename">Stickers</span>
           </div>
           <ul className="btn-area">

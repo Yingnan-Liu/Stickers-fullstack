@@ -11,6 +11,7 @@
   justify-content: space-around;
   align-items: center;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .header .top-bar .title .logo, .header-dark .top-bar .title .logo, .header .top-bar .title .titlename, .header-dark .top-bar .title .titlename {
