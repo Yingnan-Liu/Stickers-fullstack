@@ -6,14 +6,14 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
+  // Link,
   Grid,
   Typography,
   Container,
   Snackbar,
   IconButton,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  loginIcon:{
+    fontSize:'24px',
+    marginBottom:'6px'
+  }
 }));
 
 export default function SignUp(props) {
@@ -87,11 +91,11 @@ export default function SignUp(props) {
       />
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign Up
+        <div className={classes.loginIcon}>
+        👋{/* <LockOutlinedIcon /> */}
+        </div>
+        <Typography component="h3" variant="h6">
+          注册
         </Typography>
         <form
           className={classes.form}
@@ -141,10 +145,7 @@ export default function SignUp(props) {
             type="password"
             id="password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+          
           <Button
             type="submit"
             fullWidth
@@ -152,12 +153,12 @@ export default function SignUp(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            确认
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/signin" variant="body2">
-                {"Already have an account? Sign In"}
+              <Link to="/signin" style={{textDecoration:'none'}} >
+                点此登录
               </Link>
             </Grid>
           </Grid>

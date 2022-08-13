@@ -1,61 +1,67 @@
-.header {
-  background: -webkit-gradient(linear, left top, right top, from(#74ebd5), to(#acb6e5));
-  background: linear-gradient(to right, #74ebd5, #acb6e5);
-}
-
-.header .top-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
+@import url("https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap");
+.header .top-bar, .header-dark .top-bar {
   display: flex;
-  margin: 0 1rem 0 1rem;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  height: 5rem;
+  justify-content: space-between;
 }
 
-.header .top-bar .title {
-  width: 6rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
+.header .top-bar .title, .header-dark .top-bar .title {
+  width: 8rem;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 1rem;
 }
 
-.header .top-bar .title .logo {
-  font-size: 2rem;
-  margin: auto;
+.header .top-bar .title .logo, .header-dark .top-bar .title .logo, .header .top-bar .title .titlename, .header-dark .top-bar .title .titlename {
+  font-size: 1.5rem;
+  font-family: 'Oleo Script', cursive;
 }
 
-.header .top-bar .btn-area {
+.header .top-bar .btn-area, .header-dark .top-bar .btn-area {
   list-style: none;
+  margin-right: 1rem;
 }
 
-.header .top-bar .btn-area li {
+.header .top-bar .btn-area li, .header-dark .top-bar .btn-area li {
   display: inline-block;
   margin: 0 0.8rem 0 0.8rem;
 }
 
-.header .search-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.header .top-bar .btn-area .button, .header-dark .top-bar .btn-area .button {
+  text-decoration: none;
+}
+
+.header .search-area, .header-dark .search-area {
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 15rem;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+}
+
+.header .search-area #search-input, .header-dark .search-area #search-input {
+  width: 30rem;
+  height: 1rem;
 }
 
 .sticker-list-area {
   width: 100vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
-/*# sourceMappingURL=style.css.map */
+
+.header-dark {
+  color: #8039f1;
+}
+
+.header-dark .top-bar {
+  background-color: #2f2f2f;
+}
+
+.header-dark .top-bar .MuiButton-label {
+  color: #8039f1;
+}
+
+.header-dark #search-input {
+  color: aliceblue;
+}

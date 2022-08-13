@@ -59,11 +59,12 @@ const Home = () => {
     setOpen(false)
     dispatch({type:"MESSAGE",error:null})
   }
+  const toHomePage=()=>{}
   return (
     <div className="page">
       <div className={theme==="dark" ? "header-dark":"header"}>
         <div className="top-bar">
-          <div className="title">
+          <div className="title" onClick={toHomePage}>
             <span className="logo">📋</span>
             <span className="titlename">Stickers</span>
           </div>
@@ -76,14 +77,22 @@ const Home = () => {
             {username === "" ? (
               <>
                 <li className="login">
-                  <Button component={RouterLink} to="/signin">
-                    登 录
-                  </Button>
+                  {/* <Button component={RouterLink} to="/signin"> */}
+                  <RouterLink className="button" to="/signin">
+                    <Button >登 录</Button>
+                  </RouterLink>
+                    
+                  {/* </Button> */}
                 </li>
                 <li className="register">
-                  <Button component={RouterLink} to="/signup">
+                  {/* <Button component={RouterLink} to="/signup">
                     注 册
-                  </Button>
+                  </Button> */}
+                  <RouterLink  className="button" to="/signup">
+                    <Button>
+                    注 册
+                    </Button>
+                  </RouterLink>
                 </li>
               </>
             ) : (

@@ -11,7 +11,7 @@ import {
   Snackbar,
   IconButton,
 } from "@material-ui/core";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link as RouterLink} from "react-router-dom";
 import CloseIcon from "@material-ui/icons/Close";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  loginIcon:{
+    fontSize:'24px',
+    marginBottom:'6px'
+  }
 }));
 
 export default function SignIn() {
@@ -79,11 +83,11 @@ export default function SignIn() {
       />
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign In
+        <div className={classes.loginIcon}>
+        🍕{/* <LockOutlinedIcon /> */}
+        </div>
+        <Typography component="h3" variant="h6">
+          登录
         </Typography>
         <form
           className={classes.form}
@@ -126,14 +130,15 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            确认
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign In"}
-              </Link>
+              <RouterLink to="/signup" style={{textDecoration:'none'}}>
+                点此注册
+              </RouterLink>
             </Grid>
+           
           </Grid>
         </form>
       </div>

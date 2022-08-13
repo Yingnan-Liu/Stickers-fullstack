@@ -23,9 +23,13 @@
       .btn-area {
         list-style: none;
         margin-right:1rem;
+        
         li{
             display: inline-block;
             margin:0 0.8rem 0 0.8rem;            
+        }
+        .button{
+            text-decoration:none;
         }
         
       }
