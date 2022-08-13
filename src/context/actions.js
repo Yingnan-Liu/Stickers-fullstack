@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "/api/users";
+// const baseUrl = " http://localhost:5000/api/users";
+import { logBaseUrl as baseUrl } from "../service/config";
 
 
 

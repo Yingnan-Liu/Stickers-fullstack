@@ -1,10 +1,11 @@
 // import { baseUrl } from "./config";
 import {setToken} from "./config"
 import axios from "axios";
+import { noteBaseUrl as baseUrl } from "../service/config";
 
 //axios发Auth
 // const userApi=`${baseUrl}/api/notes`
-const baseUrl="/api/notes"
+// const baseUrl=" http://localhost:5000/api/notes"
 
 //将text中的\n换为《br/》
 
